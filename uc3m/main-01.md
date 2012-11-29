@@ -13,7 +13,7 @@ getwd()
 ```r
 # Llamamos a que carguen los datos 'data-01' en 'data.01'.
 data.01 <- read.delim("~/projects/linear-regression/uc3m/data/data-01.csv")
-# Muestra los datos de las variables.
+# Muestra los datos de las variables contenidas en objeto.
 data.01
 ```
 
@@ -39,16 +39,17 @@ data.01
 ```
 
 ```r
-# Llama al objeto prara trabajar con las variables que tenga dentro.
+# atribuye la trama de datos a la ruta de búsqueda R, lo que hace que sea
+# fácil acceder a los nombres de variables.
 attach(data.01)
-# Imprime en pantalla los valores del objeto.
+# Scatterplot: crea un diagrama de dispersión de y contra x
 plot(data.01)
 ```
 
 ![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1.png) 
 
 ```r
-# Muestra valores standard del objeto.
+# Primer resumen de datos.
 summary(data.01)
 ```
 
@@ -71,9 +72,9 @@ summary(data.01)
 ```
 
 ```r
-# Crear nuevo objeto que, con dos variablnes que se comportan linealmente.
+# Ajustar un modelo de regresión.
 linear = lm(PIB ~ Empleo)
-# Enseña el objeto.
+# Muestra los datos de las variables contenidas en objeto.
 linear
 ```
 
@@ -88,7 +89,7 @@ linear
 ```
 
 ```r
-# Muestra valores standard del objeto.
+# Primer resumen de datos.
 summary(linear)
 ```
 
