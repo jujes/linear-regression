@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>linear-regression: functions used!</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>linear-regression: functions used!</h1>
+
+<p>Computer statistical practice uc3m
+information:</p>
+
+<h1>source sites:</h1>
+
+<pre><code>http://msenux.redwoods.edu/math/R/regression.php
+http://dllahr.blogspot.com.es/2012/11/tips-and-tricks-in-r.html
+http://math.uprag.edu/Rsampleregression.pdf
+</code></pre>
+
+<h1>Tested:</h1>
+
+<ul>
+<li><strong>data.01 &lt;- read.delim(&ldquo;~/&quot;path&rdquo;/data-01.csv&quot;)</strong> &ndash; Carga los datos CSV en &ldquo;data.01&rdquo;</li>
+<li><strong>viewData()</strong> &ndash; Muestra los datos</li>
+<li><strong>summary()</strong> &ndash; Primer resumen de datos</li>
+<li><strong>ls()</strong> &ndash;Muestra la lista de objetos -list all objects-</li>
+<li><strong>rm()</strong> &ndash;Remueve algun objeto -remove an object-</li>
+<li><strong>rm(list = ls())</strong> &ndash;Remueve todos los objetos -remove all objects-</li>
+<li><strong>str()</strong> &ndash;La estuctura del objeto -structure-</li>
+<li><strong>length()</strong> &ndash;Carga en memoria valores del objeto.</li>
+</ul>
+
+<p>Setting and getting the working directory:</p>
+
+<p>Use File &gt; Change dir&hellip;</p>
+
+<ul>
+<li><strong>setwd(&ldquo;P:/Data/MATH/Hartlaub/Regression&rdquo;)</strong></li>
+<li><strong>getwd()</strong></li>
+<li><strong>Reading data (Creating a dataframe)</strong></li>
+<li><strong>mydata=read.csv(file=file.choose())</strong></li>
+<li><strong>mydata=read.table(file=file.choose())</strong> #use to read in the txt files for the textbook exercises</li>
+<li><strong>mydata=read.csv(~/Public/Regression/Airfreight.csv&quot;)</strong> #reading csv file from Regression folder into RStudio</li>
+<li><strong>mydata &lt;- read.csv(&ldquo;/shared/dataset_name.csv&rdquo;)</strong> #use to read a csv file from my shared folder on RStudio</li>
+<li><strong>file.copy(&ldquo;/shared/test-file.R&rdquo;, &ldquo;~/ExampleFolder/test-file.R&rdquo;)</strong> #use to copy test_file.R from my shared folder to your ExampleFolder</li>
+</ul>
+
+<p>Commands for dataframes</p>
+
+<ul>
+<li><strong>mydata</strong> &ndash;shows the entire data set</li>
+<li><strong>head(mydata)</strong> &ndash;shows the first 6 rows</li>
+<li><strong>tail(mydata)</strong> &ndash;shows the last 6 rows</li>
+<li><strong>str(mydata)</strong> &ndash;shows the variable names and types</li>
+<li><strong>names(mydata)</strong> &ndash;shows the variable names</li>
+<li><strong>rename(V1,Variable1, dataFrame=mydata)</strong> &ndash;renames V1 to Variable1; Note that epicalc package must be installed!</li>
+<li><strong>ls()</strong> &ndash;shows a list of objects that are available</li>
+<li><strong>attach(mydata)</strong> &ndash;attaches the dataframe to the R search path, which makes it easy to access variable names</li>
+</ul>
+
+<p>Descriptive Statistics</p>
+
+<ul>
+<li><strong>mean(x)</strong> &ndash;computes the mean of the variable x</li>
+<li><strong>median(x)</strong> &ndash;computes the median of the variable x</li>
+<li><strong>sd(x)</strong> &ndash;computes the standard deviation of the variable x</li>
+<li><strong>IQR(x)</strong> &ndash;computes the IQR of the variable x</li>
+<li><strong>summary(x)</strong> &ndash;computes the 5-number summary and the mean of the variable x</li>
+<li><strong>cor(x,y)</strong> &ndash;computes the correlation coefficient</li>
+<li><strong>cor(mydata)</strong> &ndash;computes a correlation matrix</li>
+<li><strong>cor.test(x,y)</strong> &ndash;test plus CI for rho</li>
+</ul>
+
+<p>Graphical Displays</p>
+
+<ul>
+<li><strong>hist(x)</strong> &ndash;creates a histogram for the variable x</li>
+<li><strong>boxplot(x)</strong> &ndash; creates a boxplot for the variable x</li>
+<li><strong>boxplot(y~x)</strong> &ndash; creates side-by-side boxplots</li>
+<li><strong>DOTplot(x)</strong> &ndash;creates a dotplot (UsingR package must be installed)</li>
+<li><strong>stem(x)</strong> &ndash;creates a stem plot for the variable x</li>
+<li><strong>plot(y~x)</strong> &ndash;creates a scatterplot of y versus x</li>
+<li><strong>plot(mydata)</strong> &ndash;provides a scatterplot matrix</li>
+<li><strong>abline(lm(y~x))</strong> &ndash;adds regression line to plot</li>
+<li><strong>lines(lowess(y~x))</strong> &ndash; adds locally weighted scatterplot smoother line to plot</li>
+<li><strong>qplot(x, y)</strong> &ndash;creates a quick plot (ggplot2 package must be installed)</li>
+<li><strong>ci.plot(regmodel)</strong> &ndash;creates a scatterplot with fitted line, confidence bands, and prediction bands (HH package must be installed)</li>
+</ul>
+
+<p>Liner Regression Models</p>
+
+<ul>
+<li><strong>regmodel=lm(y~x)</strong> &ndash;fit a regression model</li>
+<li><strong>summary(regmodel)</strong> &ndash;get results from fitting the regression model</li>
+<li><strong>anova(regmodel)</strong> &ndash;get the ANOVA table fro the regression fit</li>
+<li><strong>plot(regmodel)</strong> &ndash;get four plots, including normal probability plot, of residuals</li>
+<li><strong>fits=regmodel$fitted</strong> &ndash;store the fitted values in variable named &ldquo;fits&rdquo;</li>
+<li><strong>resids=regmodel$residuals</strong> &ndash;store the residual values in a varaible named &ldquo;resids&rdquo;</li>
+<li><strong>beta1hat=regmodel$coeff[2]</strong> &ndash;assign the slope coefficient to the name &ldquo;beta1hat&rdquo;</li>
+<li><strong>confint(regmodel)</strong> &ndash;CIs for all parameters</li>
+<li><strong>predict.lm(regmodel, interval=&ldquo;confidence&rdquo;)</strong> &ndash;make prediction and give confidence interval for the mean response</li>
+<li><strong>predict.lm(regmodel, interval=&ldquo;prediction&rdquo;)</strong> &ndash;make prediction and give prediction interval for the mean response</li>
+<li><strong>newx=data.frame(X=4)</strong> &ndash;create a new data frame with one new x* value of 4</li>
+<li><strong>predict.lm(regmodel, newx, interval=&ldquo;confidence&rdquo;)</strong> &ndash;get a CI for the mean at the value x*</li>
+</ul>
+
+<p>Tests for homogeneity of variance</p>
+
+<ul>
+<li><strong>bptest(regmodel)</strong> &ndash;get the Breusch-Pagan test (lmtest package must be installed)</li>
+<li><strong>levene.test(Y, groupvariable)</strong> &ndash;get the Levene test (lawstat package must be installed)</li>
+<li><strong>Tests for normality
+ad.test(resids)</strong> &ndash;get Anderson-Darling test for normality (nortest package must be installed)</li>
+<li><strong>cvm.test(resids)</strong> &ndash;get Cramer-von Mises test for normaility (nortest package must be installed)</li>
+<li><strong>lillie.test(resids)</strong> &ndash;get Lilliefors (Kolmogorov-Smirnov) test for normality (nortest package must be installed)</li>
+<li><strong>pearson.test(resids)</strong> &ndash;get Pearson chi-square test for normaility (nortest package must be installed)</li>
+<li><strong>sf.test(resids)</strong> &ndash;get Shapiro-Francia test for normaility (nortest package must be installed)
+Lack-of-fit test</li>
+<li>**Reduced=lm(y~x)#fit reduced model</li>
+<li><strong>Full=lm(y~0+as.factor(x))</strong> &ndash;fit full model</li>
+<li><strong>anova(Reduced, Full)</strong> &ndash;get lack-of-fit test
+boxcox(regmodel)** &ndash;evaluate possible Box-Cox transformations (MASS package must be installed)
+Model Selection</li>
+<li><strong>library(leaps)</strong> &ndash;load the leaps package</li>
+<li><strong>allmods = regsubsets(y~x1+x2+x3+x4, nbest=2, data=mydata)</strong> &ndash;(leaps package must be loaded), identify best two models for 1, 2, 3 predictors</li>
+<li><strong>summary(allmods)</strong> &ndash; get summary of best subsets</li>
+<li><strong>summary(allmods)$adjr2</strong> &ndash;adjusted R<sup>2</sup> for some models</li>
+<li><strong>summary(allmods)$cp</strong> &ndash;Cp for some models</li>
+<li><strong>plot(allmods, scale=&ldquo;adjr2&rdquo;)</strong> &ndash; plot that identifies models</li>
+<li><strong>plot(allmods, scale=&ldquo;Cp&rdquo;)</strong> &ndash; plot that identifies models</li>
+<li><strong>fullmodel=lm(y~., data=mydata)</strong> &ndash; regress y on everything in mydata
+MSE=(summary(fullmodel)$sigma)<sup>2**</sup> &ndash; store MSE for the full model</li>
+<li><strong>extractAIC(lm(y~x1+x2+x3), scale=MSE)</strong> &ndash;get Cp (equivalent to AIC)</li>
+<li><strong>step(fullmodel, scale=MSE, direction=&ldquo;backward&rdquo;)</strong> &ndash;backward elimination</li>
+<li><strong>none(lm(y~1)</strong> &ndash;regress y on the constant only</li>
+<li><strong>step(none, scope=list(upper=fullmodel), scale=MSE)</strong> &ndash;use Cp in stepwise regression</li>
+</ul>
+
+<p>Diagnostics</p>
+
+<ul>
+<li><strong>sresids=rstandard(regmodel)</strong> &ndash;store the standardized residuals in a variable named &ldquo;sresids&rdquo;</li>
+<li><strong>standresid=stdres(regmodel)</strong> &ndash;store the standardized residuals in a variable named &ldquo;standresids&rdquo;</li>
+<li><strong>stud.del.resids=rstudent(regmodel)</strong> &ndash;store the studentized deleted residuals in a variable named &ldquo;stud.del.resids&rdquo;</li>
+<li><strong>hatvalues(regmodel)</strong> &ndash;get the leverage values (hi)</li>
+<li><strong>cooks.distance(regmodel)</strong> &ndash;get Cook&#39;s distance</li>
+<li><strong>dfbetas(regmodel)</strong> &ndash;print all dfbetas</li>
+<li><strong>dfbetas(regmodel)[4,1]</strong> &ndash;dfbeta for case 4, first coefficient (i.e., b_0)</li>
+<li><strong>dffits(regmodel) [4]</strong> &ndash;dffits for case 4</li>
+<li><strong>influence(regmodel)</strong> &ndash;various influence statistics, including hat values and dfbeta (not dfbetas) values</li>
+<li><strong>library(car)</strong> &ndash;load the package car</li>
+<li><strong>vif(regmodel)</strong> &ndash;variance inflation factors</li>
+<li><strong>avPlots(regmodel)</strong> &ndash;added variable plots</li>
+</ul>
+
+</body>
+
+</html>
+
