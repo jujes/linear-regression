@@ -74,6 +74,16 @@ summary(data.01)
 ```r
 # Ajustar un modelo de regresión.
 linear = lm(PIB ~ Empleo)
+confint(linear, level = 0.99)
+```
+
+```
+##              0.5 %  99.5 %
+## (Intercept) -21.44  -6.251
+## Empleo       66.60 100.398
+```
+
+```r
 # Muestra los datos de las variables contenidas en objeto.
 linear
 ```
@@ -86,6 +96,17 @@ linear
 ## Coefficients:
 ## (Intercept)       Empleo  
 ##       -13.8         83.5
+```
+
+```r
+predict
+```
+
+```
+## function (object, ...) 
+## UseMethod("predict")
+## <bytecode: 0x2e481e8>
+## <environment: namespace:stats>
 ```
 
 ```r

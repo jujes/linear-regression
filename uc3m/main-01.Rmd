@@ -15,8 +15,10 @@ plot(data.01)
 summary(data.01)
 #Ajustar un modelo de regresión.
 linear=lm(PIB~Empleo)
+confint(linear, level=0.99)
 #Muestra los datos de las variables contenidas en objeto.
 linear
+predict
 #Primer resumen de datos.
 summary(linear)
 ```
