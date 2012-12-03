@@ -1,0 +1,50 @@
+ansc<-read.table("http://www.biw.kuleuven.be/vakken/statisticsbyR/SDVbyR/AnscombeExtended.txt")
+
+names(ansc)<-c('Group','X','Y')
+
+ansc
+
+ansc1<-subset(ansc,Group==1)
+ansc2<-subset(ansc,Group==2)
+ansc3<-subset(ansc,Group==3)
+ansc4<-subset(ansc,Group==4)
+ansc5<-subset(ansc,Group==5)
+
+Areg1<-lm(Y~X,ansc1)
+Areg2<-lm(Y~X,ansc2)
+Areg3<-lm(Y~X,ansc3)
+Areg4<-lm(Y~X,ansc4)
+Areg5<-lm(Y~X,ansc5)
+
+ansc1reg<-lm(Y~X , data= ansc , subset= Group==1)
+
+anova(Areg1)
+anova(Areg2)
+anova(Areg3)
+anova(Areg4)
+anova(Areg5)
+
+summary(Areg1)
+summary(Areg2)
+summary(Areg3)
+summary(Areg4)
+summary(Areg5)
+
+plot(Y~X,ansc1)
+abline(Areg1)
+plot(Y~X,ansc2)
+abline(Areg2)
+plot(Y~X,ansc3)
+abline(Areg3)
+plot(Y~X,ansc4)
+abline(Areg4)
+plot(Y~X,ansc5)
+abline(Areg1)
+
+op <- par(mfrow = c(2,3), pty= "m")
+
+ # 2 x 3 pictures on one plot
+plot(Y~X,ansc1); abline(Areg1);plot(Y~X,ansc2); abline(Areg2);plot(Y~X,ansc3); abline(Areg3);
+plot(Y~X,ansc4); abline(Areg4);plot(Y~X,ansc5); abline(Areg5)
+
+par(op)

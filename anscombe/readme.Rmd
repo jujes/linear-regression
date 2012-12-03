@@ -1,0 +1,122 @@
+Analysis of the Anscombe dataset
+========================================================
+
+First we need to create a Data frame. On this dataframe we execute the regression. 
+
+Steps to follow:
+
+1)
+Create the data frame on the data ( we first save  AnscombeExtended.txt   a textfile on "C:\temp\"   )
+2)  Make subsets for every Group and execute the regression;
+3)  Evaluate the computer output for the regressions;
+4)	Look to the plot and see the pitfalls.
+We create a data-frame by copy/pasting the red letters. The blue letters are the answer from the R-programme. We check the content by typing in the name of the data-frame. Remark systems like R originate in Unix in which they discriminate uppercase and undercase and replace the usual backslash "\" by two  "\\".   We give names to variables and have a look to the data..
+
+ansc<-read.table( "\\temp\\AnscombeExtended.txt")
+in more recent versions of R:
+
+ansc<-read.table("http://www.biw.kuleuven.be/vakken/statisticsbyR/SDVbyR/AnscombeExtended.txt")
+
+
+names(ansc)<-c('Group','X','Y')
+ansc    <ENTER>
+
+We see that there are 5 groups (the extended Anscombe data-set):
+
+            Group      X         Y
+     1             1      10      21.26
+     2             1        8      20.57
+     3             1      13      20.15
+
+and so on....
+
+Next copy/paste the following R-commands   (subset)  in order to make separate data-frames for each group:
+
+ansc1<-subset(ansc,Group==1)
+ansc2<-subset(ansc,Group==2)
+ansc3<-subset(ansc,Group==3)
+ansc4<-subset(ansc,Group==4)
+ansc5<-subset(ansc,Group==5)
+
+<ENTER>
+
+The function subset() 
+
+Remark that the logical equal test consists of two equal signs: " == " . 
+
+Against all elementary rules of regression we execute regression before looking to a plot ( is indeed very stupid!!!)
+
+Areg1<-lm(Y~X,ansc1)
+Areg2<-lm(Y~X,ansc2)
+Areg3<-lm(Y~X,ansc3)
+Areg4<-lm(Y~X,ansc4)
+Areg5<-lm(Y~X,ansc5)
+
+ [ We could also directly use subset in the "lm" statement:  ansc1reg<-lm(Y~X , data= ansc , subset= Group==1)  ]
+
+We continue in a stupid way (= without visual inspection of the data)  and check the output:
+
+anova(Areg1)  
+
+                    Df       Sum Sq       Mean Sq      Fvalue           Pr(>F) 
+X                     1        8.6240           8.6240        5.6448         0.04151 *
+Residuals       9      13.7500          1.5278
+
+and see that all regressions have identical ANOVA tables and in the same way all the b1 and b0 are identical:
+
+summary(Areg5)
+
+(Intercept)    X 
+    18.43      0.28
+
+The big blunder, we made deliberately, was caused by not firstly looking to a plot of  the data:
+
+plot(Y~X,ansc1)
+abline(Areg1)
+
+Only the first Group shows a good regression; all the other Groups have different serious reasons for not starting a  linear regression.
+
+We can plot all the 5 cases together in one plot:
+
+op <- par(mfrow = c(2,3), pty= "s")            
+
+ # 2 x 3 pictures on one plot
+plot(Y~X,ansc1); abline(Areg1);plot(Y~X,ansc2); abline(Areg2);plot(Y~X,ansc3); abline(Areg3);
+plot(Y~X,ansc4); abline(Areg4);plot(Y~X,ansc5); abline(Areg5)
+
+
+par(op)
+
+The magnificient result is:
+
+
+
+We used the function par():
+
+help(par) gives information about the function:
+
+Quote from the help:
+"
+`par' can be used to set or query graphical parameters. Parameters
+can be set by specifying them as arguments to `par' in `tag =
+value' form, or by passing them as a list of tagged values.
+" (end quote)
+
+Alternative to make multiple graphs on one window  is by the  function layout().
+
+ help(layout) gives information about the function:
+
+Example of use for 4 graphs on this case:
+
+## divide the window into two rows and three columns
+## allocate 5 figures (1 to 5)  consecutively via the matrix( c(......))
+## the sixth part of the window is not used
+## fill in by row
+## show the regions that have been allocated to each plot
+The R-command is:
+
+layout(matrix(c(1,2,3,4,5,0), 2, 3, byrow = TRUE))
+
+To show how the window will be used:
+
+layout.show(5)
