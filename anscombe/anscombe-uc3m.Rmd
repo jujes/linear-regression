@@ -1,0 +1,53 @@
+Anscombe UC3M
+========================================================
+
+```{r}
+combe <- read.delim("~/projects/linear-regression/anscombe/data/combe.txt", header=F)
+
+names(combe)<-c('Group','X','Y')
+
+combe
+
+ansc1<-subset(combe,Group==1)
+ansc2<-subset(combe,Group==2)
+ansc3<-subset(combe,Group==3)
+ansc4<-subset(combe,Group==4)
+ansc5<-subset(combe,Group==5)
+
+Areg1<-lm(Y~X,ansc1)
+Areg2<-lm(Y~X,ansc2)
+Areg3<-lm(Y~X,ansc3)
+Areg4<-lm(Y~X,ansc4)
+
+ansc1reg<-lm(Y~X , data= combe , subset= Group==1)
+ansc1reg<-lm(Y~X , data= combe , subset= Group==2)
+ansc1reg<-lm(Y~X , data= combe , subset= Group==3)
+ansc1reg<-lm(Y~X , data= combe , subset= Group==4)
+
+anova(Areg1)
+anova(Areg2)
+anova(Areg3)
+anova(Areg4)
+
+summary(Areg1)
+summary(Areg2)
+summary(Areg3)
+summary(Areg4)
+
+plot(Y~X,ansc1)
+abline(Areg1)
+plot(Y~X,ansc2)
+abline(Areg2)
+plot(Y~X,ansc3)
+abline(Areg3)
+plot(Y~X,ansc4)
+abline(Areg4)
+
+op <- par(mfrow = c(2,2), pty= "m")
+
+"# 2 x 2 pictures on one plot"
+plot(Y~X,ansc1); abline(Areg1);plot(Y~X,ansc2); abline(Areg2);
+plot(Y~X,ansc3); abline(Areg3);plot(Y~X,ansc4); abline(Areg4)
+
+par(op)
+```

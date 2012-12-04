@@ -1,6 +1,8 @@
 Analysis of the Anscombe dataset
 ========================================================
 
+http://www.agr.kuleuven.ac.be/vakken/statisticsbyR/SDVbyR/Anscombe%20Regression%20example.htm
+
 First we need to create a Data frame. On this dataframe we execute the regression. 
 
 Steps to follow:

@@ -1,4 +1,8 @@
-ansc<-read.table("http://www.biw.kuleuven.be/vakken/statisticsbyR/SDVbyR/AnscombeExtended.txt")
+Anscombe Extended
+========================================================
+
+```{r}
+ansc <- read.delim("http://www.biw.kuleuven.be/vakken/statisticsbyR/SDVbyR/AnscombeExtended.txt")
 
 names(ansc)<-c('Group','X','Y')
 
@@ -43,8 +47,9 @@ abline(Areg1)
 
 op <- par(mfrow = c(2,3), pty= "m")
 
- # 2 x 3 pictures on one plot
+"# 2 x 3 pictures on one plot"
 plot(Y~X,ansc1); abline(Areg1);plot(Y~X,ansc2); abline(Areg2);plot(Y~X,ansc3); abline(Areg3);
 plot(Y~X,ansc4); abline(Areg4);plot(Y~X,ansc5); abline(Areg5)
 
 par(op)
+```
